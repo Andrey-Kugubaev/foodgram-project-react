@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Ошибка 404{% endblock %}
+{% block css %}<link rel="stylesheet" href="{% static 'pages/form.css' %}">{% endblock css %}
+
+{% block main_title %}Ошибка 404{% endblock main_title %}
+
+{% block content %}
+
+    <div class="form-container">
+        <form class="form">
+            <p class="form__info-text">Страница <code style="color: #4A61DD">{{ path }}</code> не найдена</p>
+            <p class="form__info-text"><a href="{% url 'index' %}" style="color: #4A61DD">Вернуться на главную</a></p>
+        </form>
+    </div>
+
+{% endblock %} 

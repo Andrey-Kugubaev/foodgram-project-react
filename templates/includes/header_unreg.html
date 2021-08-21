@@ -1,0 +1,13 @@
+{% with request.resolver_match.url_name as url_name %}
+    <nav class="nav">
+        <div class="nav__container container">
+            <ul class="nav__items list">
+                <li class="nav__item {% if 'index' not in url_name %}nav__item_disabled{% endif %}"><a href="{% url 'index' %}" class="nav__link link">Рецепты</a></li>
+            </ul>
+            <ul class="nav__items list">
+                <li class="nav__item"><a href="{% url 'login' %}" class="nav__link link">Войти</a></li>
+                <li class="nav__item"><a href="{% url 'signup' %}" class="button button_style_blue">Создать аккаунт</a></li>
+            </ul>
+        </div>
+    </nav>
+{% endwith %}

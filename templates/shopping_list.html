@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+{% load recipe_filters %}
+{% load thumbnail %}
+
+{% block title %}Список покупок{% endblock %}
+{% block css %}<link rel="stylesheet" href="{% static 'pages/shopList.css' %}">{% endblock css %}
+
+
+{% block main_title %}
+    {% with shop_list_count=user.users_shopping_lists.all.count %}
+        {% if shop_list_count > 0 %}
+            Список покупок
+        {% else %}
+            Список покупок пуст
+        {% endif %}
+    {% endwith %}
+{% endblock main_title %}
+
+
+
+{% block content %}
+{% csrf_token %}
+
+    {% with shop_list_count=user.users_shopping_lists.all.count %}
+        {% if shop_list_count > 0 %}
+            <div class="card-list card-list_column">
+                <ul class="shopping-list">
+                    {% for purchase in shopping_list %}
+                        <li class="shopping-list__item" data-id="{{ purchase.recipe.id }}">
+                            <div class="recipe recipe_reverse">
+                                {% thumbnail purchase.recipe.image "90x90" crop="center" upscale=True as im %}
+                                    <img src="{{ im.url }}" alt="{{ purchase.recipe }}" class="recipe__image recipe__image_big">
+                                {% endthumbnail %}
+                                <h3 class="recipe__title">{{ purchase.recipe }}</h3>
+                                <p class="recipe__text"><span class="icon-time"></span> {{ purchase.recipe.cooking_time }} мин.</p>
+                            </div>
+                            <a href="" class="shopping-list__button link">Удалить</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <a href="{% url 'shopping_list_save' %}"><button class="button button_style_blue">Скачать список</button></a>
+            </div>
+        {% else %}
+            <div class="card-list card-list_column">
+                <ul class="shopping-list">
+                    <li class="shopping-list__item">
+                        <div class="recipe recipe_reverse">
+                            <h3 class="recipe__title" style="max-width: 400px">Вы не добавили рецепт для списка покупок</h3>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        {% endif %}
+    {% endwith %}
+
+{% endblock content %}
+
+{% block js %}
+    <script src="{% static 'js/config/config.js' %}"></script>
+    <script src="{% static 'js/components/Header.js' %}"></script>
+    <script src="{% static 'js/components/ShopList.js' %}"></script>
+    <script src="{% static 'js/api/Api.js' %}"></script>
+    <script src="{% static 'shopList.js' %}"></script>
+{% endblock js %}

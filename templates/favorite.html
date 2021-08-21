@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% load recipe_filters %}
+{% block title %}Рецепты{% endblock %}
+
+{% block main_title %}Избранное{% endblock main_title %}
+{% block tags %}{% include 'includes/tags.html' %}{% endblock tags %}
+
+{% block content %}
+    <div class="card-list">
+        {% for item in page %}
+            {% include 'includes/recipe_card.html' with recipe=item.recipe %}
+        {% endfor %}
+    </div>
+        {% if page.has_other_pages %}
+            {% include "includes/paginator.html" with items=page paginator=paginator %}
+        {% endif %}
+
+{% endblock content %}
+
+{% block js %}
+  <script src="{% static 'js/components/MainCards.js' %}"></script>
+
+  <script src="{% static 'js/components/Purchases.js' %}"></script>
+  <script src="{% static 'js/components/Favorites.js' %}"></script>
+
+  <script src="{% static 'js/config/config.js' %}"></script>
+  <script src="{% static 'js/components/CardList.js' %}"></script>
+  <script src="{% static 'js/components/Header.js' %}"></script>
+
+  <script src="{% static 'js/api/Api.js' %}"></script>
+  <script src="{% static 'favorite.js' %}"></script>
+{% endblock js %}

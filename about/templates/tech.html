@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block css %}<link rel="stylesheet" href="{% static 'pages/form.css' %}">{% endblock css %}
+
+{% block content %}
+
+    <div class="form-container">
+        <div class="form">
+            <p style="text-align: center;"><a><b>Технологии</b></a></p>
+            <p style="text-align: center; margin-top: 20px;"><a href="https://www.python.org/downloads/release/python-390/"><b>Python 3.9.0</b></a></p>
+            <p style="text-align: center; margin-top: 20px;"><a href="https://docs.djangoproject.com/en/3.2/releases/3.2.6/"><b>Django 3.2.6</b></a></p>
+        </div>
+    </div>
+
+{% endblock %}
