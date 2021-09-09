@@ -1,16 +1,18 @@
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from django.db.models import Sum, F
+from django.db.models import F, Sum
 from django.http import HttpResponse, JsonResponse
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_http_methods
 
 from foodgram import settings
 from recipes.forms import RecipeForm
-from recipes.models import Ingredient, Recipe, FavoriteRecipe, Follow, ShoppingList
-from recipes.utils import (get_ingredients, add_ingredients_to_recipe, save_recipe,
-                           get_tags_for_filter, ingredients_for_shopping_list)
+from recipes.models import (FavoriteRecipe, Follow, Ingredient, Recipe,
+                            ShoppingList)
+from recipes.utils import (add_ingredients_to_recipe, get_ingredients,
+                           get_tags_for_filter, ingredients_for_shopping_list,
+                           save_recipe)
 
 User = get_user_model()
 

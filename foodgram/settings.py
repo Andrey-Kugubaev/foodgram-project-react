@@ -106,6 +106,6 @@ EMAIL_HOST_PASSWORD = ''
 
 OBJECT_PER_PAGE = 6
 
-SITE_ID=1
+SITE_ID = 1
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

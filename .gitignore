@@ -134,3 +134,6 @@ staticfiles/
 media/
 
 dump.json
+
+.idea
+.idea/
