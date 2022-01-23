@@ -44,7 +44,7 @@ def index(request):
         'tags': tags,
         'tags_for_filter': tags_for_filter,
     }
-    return render(request, 'index.html', context)
+    return render(request, 'recipes/index.html', context)
 
 
 def authors_recipes(request, username):
@@ -67,7 +67,7 @@ def authors_recipes(request, username):
         follow = Follow.objects.filter(user=my_user, author=author)
         follow_or_author = follow or my_user == author
         context['follow_or_author'] = follow_or_author
-    return render(request, 'authors_recipes.html', context)
+    return render(request, 'recipes/authors_recipes.html', context)
 
 
 def view_recipe(request, recipe_id):
@@ -75,7 +75,7 @@ def view_recipe(request, recipe_id):
     context = {
         'recipe': recipe,
     }
-    return render(request, 'recipe_view.html', context)
+    return render(request, 'recipes/recipe_view.html', context)
 
 
 @login_required
@@ -87,7 +87,7 @@ def add_recipe(request):
     context = {
         'form': form,
     }
-    return render(request, 'recipe_form.html', context)
+    return render(request, 'recipes/recipe_form.html', context)
 
 
 @login_required
@@ -110,7 +110,7 @@ def edit_recipe(request, recipe_id):
         'form': form,
         'recipe': recipe,
     }
-    return render(request, 'recipe_form.html', context)
+    return render(request, 'recipes/recipe_form.html', context)
 
 
 @login_required
@@ -138,7 +138,7 @@ def favorite(request):
         'tags': tags,
         'tags_for_filter': tags_for_filter,
     }
-    return render(request, 'favorite.html', context)
+    return render(request, 'recipes/favorite.html', context)
 
 
 @login_required
@@ -152,7 +152,7 @@ def subscriptions_list(request):
         'page': page,
         'paginator': paginator
     }
-    return render(request, 'subscriptions.html', context)
+    return render(request, 'recipes/subscriptions.html', context)
 
 
 @login_required
@@ -162,11 +162,16 @@ def favorites(request, recipe_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
     context = {'success': True}
     if request.method == 'POST':
-        _, created = FavoriteRecipe.objects.get_or_create(user=my_user,
-                                                          recipe=recipe)
+        favorite_recipe = FavoriteRecipe.objects.get_or_create(
+            user=my_user,
+            recipe=recipe
+        )
         return JsonResponse(context)
-    favorite_recipe = get_object_or_404(FavoriteRecipe, user=my_user,
-                                        recipe__id=recipe_id)
+    favorite_recipe = get_object_or_404(
+        FavoriteRecipe,
+        user=my_user,
+        recipe__id=recipe_id
+    )
     favorite_recipe.delete()
     return JsonResponse(context)
 
@@ -178,7 +183,10 @@ def subscriptions(request, author_id):
     author = get_object_or_404(User, id=author_id)
     context = {'success': True}
     if request.method == 'POST':
-        _, created = Follow.objects.get_or_create(user=my_user, author=author)
+        subscription = Follow.objects.get_or_create(
+            user=my_user,
+            author=author
+        )
         return JsonResponse(context)
     subscription = Follow.objects.filter(user=my_user, author=author)
     if subscription.exists():
@@ -193,11 +201,16 @@ def purchases(request, recipe_id):
     recipe = get_object_or_404(Recipe, id=recipe_id)
     context = {'success': True}
     if request.method == 'POST':
-        _, created = ShoppingList.objects.get_or_create(user=my_user,
-                                                        recipe=recipe)
+        recipe = ShoppingList.objects.get_or_create(
+            user=my_user,
+            recipe=recipe
+        )
         return JsonResponse(context)
-    favorite_recipe = get_object_or_404(ShoppingList, user=my_user,
-                                        recipe=recipe)
+    favorite_recipe = get_object_or_404(
+        ShoppingList,
+        user=my_user,
+        recipe=recipe
+    )
     favorite_recipe.delete()
     return JsonResponse(context)
 
@@ -209,7 +222,7 @@ def shopping_list(request):
     context = {
         'shopping_list': shopping_list,
     }
-    return render(request, 'shopping_list.html', context)
+    return render(request, 'recipes/shopping_list.html', context)
 
 
 @login_required

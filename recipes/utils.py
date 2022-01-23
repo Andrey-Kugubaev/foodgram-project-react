@@ -47,8 +47,8 @@ def save_recipe(request, form):
 def get_tags_for_filter(request):
     tags = Tag.objects.all()
     tags_id = tags.values_list('id', flat=True)
-    request_teg_id = [int(tag_id) for tag_id in request.GET.getlist('tags')]
-    tags_for_filter = request_teg_id or tags_id
+    request_tag_id = [int(tag_id) for tag_id in request.GET.getlist('tags')]
+    tags_for_filter = request_tag_id or tags_id
     return tags, tags_for_filter,
 
 

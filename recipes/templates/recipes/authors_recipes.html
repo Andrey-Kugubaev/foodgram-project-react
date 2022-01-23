@@ -1,10 +1,10 @@
-{% extends "base.html" %}
+{% extends "recipes/base.html" %}
 {% load static %}
 {% load recipe_filters %}
 {% block title %}Рецепты{% endblock %}
 
 {% block main_title %}{{ author.username }}{% endblock main_title %}
-{% block tags %}{% include 'includes/tags.html' %}{% endblock tags %}
+{% block tags %}{% include 'recipes/includes/tags.html' %}{% endblock tags %}
 
 {% block content %}
 {% csrf_token %}
@@ -25,11 +25,11 @@
     {% endif %}
     <div class="card-list">
         {% for recipe in page %}
-            {% include 'includes/recipe_card.html' with recipe=recipe %}
+            {% include 'recipes/includes/recipe_card.html' with recipe=recipe %}
         {% endfor %}
     </div>
         {% if page.has_other_pages %}
-            {% include "includes/paginator.html" with items=page paginator=paginator %}
+            {% include "recipes/includes/paginator.html" with items=page paginator=paginator %}
         {% endif %}
 
 {% endblock content %}
