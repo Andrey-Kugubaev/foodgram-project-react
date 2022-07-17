@@ -9,11 +9,11 @@
 {% block content %}
     <div class="card-list">
         {% for author in page %}
-            {% include 'includes/follow_card.html' with author=author %}
+            {% include 'recipes/includes/follow_card.html' with author=author %}
         {% endfor %}
     </div>
         {% if page.has_other_pages %}
-            {% include 'includes/paginator.html' with items=page paginator=paginator %}
+            {% include 'recipes/includes/paginator.html' with items=page paginator=paginator %}
         {% endif %}
 
 {% endblock content %}
