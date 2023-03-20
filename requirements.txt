@@ -13,6 +13,7 @@ pyparsing==2.4.7
 pytest==6.2.4
 python-dotenv==0.20.0
 pytz==2021.1
+sorl-thumbnail==11.12
 sqlparse==0.4.1
 toml==0.10.2
 
