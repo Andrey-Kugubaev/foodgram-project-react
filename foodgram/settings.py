@@ -1,6 +1,4 @@
 import os
-from datetime import timedelta
-from pathlib import Path
 
 from dotenv import load_dotenv
 
@@ -26,7 +24,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sorl.thumbnail',
-    #'rest_framework',
 ]
 
 MIDDLEWARE = [

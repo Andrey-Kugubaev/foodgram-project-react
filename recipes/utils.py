@@ -9,12 +9,14 @@ def get_ingredients(request):
         if key.startswith('nameIngredient'):
             ingredient_id = key.split('_')[-1]
             ingredient_name = request.POST[key]
-            ingredient_value = int(request.POST[
-                                       'valueIngredient_' + ingredient_id])
+            ingredient_value = int(
+                request.POST['valueIngredient_' + ingredient_id]
+            )
             if ingredient_value < 1:
                 continue
             ingredients[ingredient_name] = (
-                    ingredients.get(ingredient_name, 0) + ingredient_value)
+                    ingredients.get(ingredient_name, 0) + ingredient_value
+            )
     return ingredients
 
 
