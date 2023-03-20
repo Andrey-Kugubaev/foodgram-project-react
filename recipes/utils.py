@@ -15,7 +15,7 @@ def get_ingredients(request):
             if ingredient_value < 1:
                 continue
             ingredients[ingredient_name] = (
-                    ingredients.get(ingredient_name, 0) + ingredient_value
+                ingredients.get(ingredient_name, 0) + ingredient_value
             )
     return ingredients
 
